@@ -43,7 +43,7 @@ public class PizzaController {
 		return elencoPizze;
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("{id}")	// SHOW
 	public ResponseEntity<Pizza> show(@PathVariable("id") Long id) {
 		Optional<Pizza> res = pizzaRepository.findById(id);
 		if (res.isPresent()) {
@@ -53,12 +53,12 @@ public class PizzaController {
 		}
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/create")	// CREATE
 	public Pizza create(@RequestBody Pizza pizza) {
 		return pizzaRepository.save(pizza);
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/update/{id}")	// UPDATE
 	public ResponseEntity<Pizza> update(@RequestBody Pizza pizza,
 			@PathVariable("id") Long id) {
 		
@@ -77,7 +77,7 @@ public class PizzaController {
 		}
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/delete/{id}")	// DELETE
 	public String delete(@PathVariable Long id) {
 		Optional<Pizza> pizzaFromDb = pizzaRepository.findById(id);
 		
