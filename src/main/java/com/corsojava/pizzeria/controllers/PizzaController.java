@@ -79,7 +79,13 @@ public class PizzaController {
 	
 	@DeleteMapping("{id}")
 	public String delete(@PathVariable Long id) {
-		pizzaRepository.deleteById(id);
-		return "Eliminazione effettuata";
+		Optional<Pizza> pizzaFromDb = pizzaRepository.findById(id);
+		
+		if (pizzaFromDb.isPresent()) {
+			pizzaRepository.deleteById(id);
+			return "Eliminazione effettuata";
+		} else {
+			return "La Pizza da eliminare non è presente nel database";
+		}
 	}
 }
