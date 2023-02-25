@@ -30,7 +30,7 @@ public class PizzaController {
 	PizzaRepository pizzaRepository;
 	
 	@GetMapping
-	public List<Pizza> index(@RequestParam(name = "keyword", required = false) String keyword) {
+	public ResponseEntity<List<Pizza>> index(@RequestParam(name = "keyword", required = false) String keyword) {
 		
 		List<Pizza> elencoPizze;
 		
@@ -40,7 +40,7 @@ public class PizzaController {
 			elencoPizze = pizzaRepository.findAll(Sort.by("name"));
 		}
 		
-		return elencoPizze;
+		return new ResponseEntity<List<Pizza>>(elencoPizze, HttpStatus.OK);
 	}
 	
 	@GetMapping("{id}")	// SHOW
@@ -54,8 +54,9 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/create")	// CREATE
-	public Pizza create(@RequestBody Pizza pizza) {
-		return pizzaRepository.save(pizza);
+	public ResponseEntity<Pizza> create(@RequestBody Pizza pizza) {
+		Pizza newPizza = pizzaRepository.save(pizza);
+		return new ResponseEntity<Pizza>(newPizza, HttpStatus.CREATED); 
 	}
 	
 	@PutMapping("/update/{id}")	// UPDATE
@@ -76,16 +77,16 @@ public class PizzaController {
 			return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@DeleteMapping("/delete/{id}")	// DELETE
-	public String delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) {
 		Optional<Pizza> pizzaFromDb = pizzaRepository.findById(id);
 		
 		if (pizzaFromDb.isPresent()) {
 			pizzaRepository.deleteById(id);
-			return "Eliminazione effettuata";
+			return new ResponseEntity<String>("Pizza eliminata correttamente dal database", HttpStatus.NO_CONTENT);
 		} else {
-			return "La Pizza da eliminare non è presente nel database";
+			return new ResponseEntity<String>("La Pizza da eliminare non è presente nel database", HttpStatus.NOT_FOUND) ;
 		}
 	}
 }
