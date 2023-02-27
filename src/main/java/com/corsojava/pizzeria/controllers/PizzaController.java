@@ -39,7 +39,8 @@ public class PizzaController {
 		if (keyword!=null && !keyword.isEmpty()) {
 			elencoPizze = pizzaRepository.findByNameLike(keyword + "%");
 		} else {
-			elencoPizze = pizzaRepository.findAll(Sort.by("name"));
+			elencoPizze = pizzaRepository.findAll();
+//			elencoPizze = pizzaRepository.findAll(Sort.by("name"));
 		}
 		
 		if (elencoPizze.size() == 0) {
@@ -60,7 +61,7 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/create")	// CREATE
-	public ResponseEntity<Pizza> create(@Valid @RequestBody Pizza pizza) {
+	public ResponseEntity<Pizza> create(@RequestBody Pizza pizza) {
 		Pizza newPizza = pizzaRepository.save(pizza);
 		return new ResponseEntity<Pizza>(newPizza, HttpStatus.CREATED); 
 	}

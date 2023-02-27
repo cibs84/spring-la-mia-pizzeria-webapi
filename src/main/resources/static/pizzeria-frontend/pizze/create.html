@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <title>Crea nuova pizza</title>
 
-<th:block th:replace="~{fragments :: head}"></th:block>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
 	<main class="container">
 		<h1 class="mt-4">Crea una nuova pizza</h1>
 		
 		<!--  Form: Crea una nuova pizza -->
-		<form id="pizza-form" onsubmit="createPizza(event)" method="post">
+		<form id="pizza-form" onsubmit="createPizza()">
 			<!--  Nome -->
 	    	<label for="name" class="form-label">Nome</label>
 	    	<input type="text" maxlength="30" class="form-control" id="name">
@@ -53,12 +54,9 @@
 			</div>
 		  	
 		  	<h4>Ingredienti</h4>
-			<div th:each="ingrediente : ${ingredienti}">
-				<input type="checkbox" class="form-check-input" th:value="${ingrediente.id}" 
-				th:field="${pizza.ingredienti}" th:id="|ingrediente_${ingrediente.id}|">
-				<label class="form-check-label" th:text="${ingrediente.name}" 
-					th:for="|ingrediente_${ingrediente.id}|"></label>
-			</div>
+			<div id="no_ingredients">Non ci sono ingredienti disponibili</div>
+			<!-- Ciclo in #ingredients con create.js -->
+			<div id="ingredients" class="mb-4"></div>
 		  	
 		  	<!-- Button Crea -->
 		  	<button type="submit" class="btn btn-primary">Crea</button>
