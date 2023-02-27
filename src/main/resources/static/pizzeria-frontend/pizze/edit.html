@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Crea nuova pizza</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<main class="container">
+		<h1 class="mt-4">Crea una nuova pizza</h1>
+		
+		<!--  Form: Crea una nuova pizza -->
+		<form id="pizza-form" onsubmit="createPizza(event)" method="post">
+			<!--  Nome -->
+	    	<label for="name" class="form-label">Nome</label>
+	    	<input type="text" maxlength="30" class="form-control" id="name">
+			<!-- Validation Error -->
+		  	<div class="text-danger">
+				<ul id="name_err">
+					
+				</ul>
+			</div>
+		  
+			<!--  Descrizione -->
+	    	<label for="description" class="form-label">Descrizione</label>
+	    	<input type="text" maxlength="100" class="form-control" id="description">
+		  	<!-- Validation Error -->
+		  	<div class="text-danger">
+				<ul id="description_err">
+					
+				</ul>
+			</div>
+		  
+			<!--  Prezzo -->
+	    	<label for="price" class="form-label">Prezzo</label>
+	    	<input type="number" min="1" max="99.99" step="0.50" class="form-control" id="price">
+		  	<!-- Validation Error -->
+		  	<div class="text-danger">
+				<ul id="price_err">
+					
+				</ul>
+			</div>
+		  
+			<!--  Immagine -->
+	    	<label for="photo" class="form-label">Immagine</label>
+	    	<input type="text" maxlength="400" class="form-control" id="photo">
+		  	<!-- Validation Error -->
+		  	<div class="text-danger">
+				<ul id="photo_err">
+					
+				</ul>
+			</div>
+		  	
+		  	<h4>Ingredienti</h4>
+			<div th:each="ingrediente : ${ingredienti}">
+				<input type="checkbox" class="form-check-input" th:value="${ingrediente.id}" 
+				th:field="${pizza.ingredienti}" th:id="|ingrediente_${ingrediente.id}|">
+				<label class="form-check-label" th:text="${ingrediente.name}" 
+					th:for="|ingrediente_${ingrediente.id}|"></label>
+			</div>
+		  	
+		  	<!-- Button Crea -->
+		  	<button type="submit" class="btn btn-primary">Crea</button>
+		  	<!-- Button Annulla -->
+		  	<button type="submit" href="./index.html" class="btn btn-danger">Annulla</button>
+		</form>
+	</main>
+
+	<!-- Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/create.js"></script>
+</body>
+</html>

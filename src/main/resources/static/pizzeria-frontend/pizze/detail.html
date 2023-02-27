@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Pizza</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+	<main class="container">
+		
+		<h1 id="pizzaName" class="text-center my-5"></h1>
+		<div class="row">
+			<div class="ms-auto col-6">
+				<img id="pizzaPhoto" class="mb-3" width="100%">
+				<h4>Descrizione</h4>
+				<p id="pizzaDescription"></p>
+			</div>
+			<div class="me-auto col-4">
+				<a id="btnOfferCreate" class="my-3 d-inline-block btn btn-primary">
+					Crea offerta
+				</a>
+
+				<h4>Offerte</h4>
+				<div id="no_offers" class="mb-5">Non ci sono offerte</div>
+				<table id="offers" class="table table-hover align-middle">
+					<thead>
+					    <tr>
+					      <th scope="col">Nome</th>
+					      <th scope="col">Data Inizio</th>
+					      <th scope="col">Data Fine</th>
+					    </tr>
+			  		</thead>
+
+					<tbody id="offers_table">
+					    
+				  	</tbody>
+				</table>
+				
+				<!-- Ingredienti -->
+				<h4 class="mt-5">Ingredienti</h4>
+				<div id="no_ingredients">Non ci sono ingredienti</div>
+				<table id="ingredients" class="table table-hover align-middle">
+					<thead>
+					    <tr>
+					      <th scope="col">Id</th>
+					      <th scope="col">Nome</th>
+					    </tr>
+			  		</thead>
+
+					<tbody id="ingredients_table">
+					    
+				  	</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+	
+	<!-- Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/detail.js"></script>
+</body>
+</html>

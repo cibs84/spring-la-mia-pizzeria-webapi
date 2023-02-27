@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.corsojava.pizzeria.models.Pizza;
 import com.corsojava.pizzeria.repository.PizzaRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/pizze")
@@ -40,7 +42,11 @@ public class PizzaController {
 			elencoPizze = pizzaRepository.findAll(Sort.by("name"));
 		}
 		
-		return new ResponseEntity<List<Pizza>>(elencoPizze, HttpStatus.OK);
+		if (elencoPizze.size() == 0) {
+			return new ResponseEntity<List<Pizza>>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Pizza>>(elencoPizze, HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping("{id}")	// SHOW
@@ -54,13 +60,13 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/create")	// CREATE
-	public ResponseEntity<Pizza> create(@RequestBody Pizza pizza) {
+	public ResponseEntity<Pizza> create(@Valid @RequestBody Pizza pizza) {
 		Pizza newPizza = pizzaRepository.save(pizza);
 		return new ResponseEntity<Pizza>(newPizza, HttpStatus.CREATED); 
 	}
 	
 	@PutMapping("/update/{id}")	// UPDATE
-	public ResponseEntity<Pizza> update(@RequestBody Pizza pizza,
+	public ResponseEntity<Pizza> update(@Valid @RequestBody Pizza pizza,
 			@PathVariable("id") Long id) {
 		
 		Optional<Pizza> pizzaFromDb = pizzaRepository.findById(id);
@@ -70,9 +76,9 @@ public class PizzaController {
 	        pizzaFromDb.get().setDescription(pizza.getDescription());
 	        pizzaFromDb.get().setPhoto(pizza.getPhoto());
 	        pizzaFromDb.get().setPrice(pizza.getPrice());
-	        pizza = pizzaRepository.save(pizzaFromDb.get());
+	        Pizza modifiedPizza = pizzaRepository.save(pizzaFromDb.get());
 	        
-	        return new ResponseEntity<Pizza>(pizza, HttpStatus.OK);
+	        return new ResponseEntity<Pizza>(modifiedPizza, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
 		}
