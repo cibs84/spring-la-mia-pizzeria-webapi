@@ -61,7 +61,7 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/create")	// CREATE
-	public ResponseEntity<Pizza> create(@RequestBody Pizza pizza) {
+	public ResponseEntity<Pizza> create(@Valid @RequestBody Pizza pizza) {
 		Pizza newPizza = pizzaRepository.save(pizza);
 		return new ResponseEntity<Pizza>(newPizza, HttpStatus.CREATED); 
 	}

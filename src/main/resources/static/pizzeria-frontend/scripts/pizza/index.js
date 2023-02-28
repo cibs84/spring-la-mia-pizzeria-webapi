@@ -5,7 +5,7 @@ function pizzaList() {
         .get('http://localhost:8080/api/pizze') // method e endpoint
         .then((res) => {
             // codice da eseguire se la richiesta è andata a buon fine
-            console.log('richiesta ok', res);
+            console.log('Richiesta Ok: ', res);
 
             // SE non ci sono pizze
             if (res.data.length > 0) {
@@ -23,17 +23,16 @@ function pizzaList() {
 			      <td>${pizza.name}</td>
 			      <td>${pizza.description}</td>
 			      <td>€ ${pizza.price}</td>
+			      <td>
+                    <img src="${pizza.photo}" width="100">
+                  </td>
                   <td>
                     <a class="btn btn-primary" href="./detail.html?id=${pizza.id}">
                         <i class="fa-solid fa-sheet-plastic"></i> 
                     </a>
-                  </td>
-                  <td>
                     <a class="btn btn-success" href="./edit.html?id=${pizza.id}">
                         <i class="fa-regular fa-pen-to-square"></i> 
                     </a>
-                  </td>
-			      <td>
                     <a class="btn btn-danger" onclick="deletePizza(${pizza.id})">
                         <i class="fa fa-trash-alt"></i> 
                     </a>
@@ -43,10 +42,9 @@ function pizzaList() {
 
             });
         })
-        .catch((res) => {
+        .catch((err) => {
             // codice da eseguire se la richiesta non è andata a buon fine
-            console.error('errore nella richiesta', res);
-            alert('Errore durante la richiesta!');
+            console.error('Errore nella richiesta: ', err);
         })
 }
 

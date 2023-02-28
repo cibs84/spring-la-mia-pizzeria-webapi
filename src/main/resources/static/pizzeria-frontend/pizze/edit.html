@@ -2,17 +2,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Crea nuova pizza</title>
+<title>Modifica pizza</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
 	<main class="container">
-		<h1 class="mt-4">Crea una nuova pizza</h1>
+		<h1 class="mt-4">Modifica pizza</h1>
 		
-		<!--  Form: Crea una nuova pizza -->
-		<form id="pizza-form" onsubmit="createPizza(event)" method="post">
+		<!--  Form: Modifica pizza -->
+		<form id="pizza-form" onsubmit="updatePizza(event)">
 			<!--  Nome -->
 	    	<label for="name" class="form-label">Nome</label>
 	    	<input type="text" maxlength="30" class="form-control" id="name">
@@ -53,24 +53,22 @@
 				</ul>
 			</div>
 		  	
-		  	<h4>Ingredienti</h4>
-			<div th:each="ingrediente : ${ingredienti}">
-				<input type="checkbox" class="form-check-input" th:value="${ingrediente.id}" 
-				th:field="${pizza.ingredienti}" th:id="|ingrediente_${ingrediente.id}|">
-				<label class="form-check-label" th:text="${ingrediente.name}" 
-					th:for="|ingrediente_${ingrediente.id}|"></label>
-			</div>
+			<h4>Ingredienti</h4>
+			<div id="no_ingredients">Non ci sono ingredienti disponibili</div>
+			<!-- Ciclo in #ingredients con edit.js -->
+			<div id="ingredients" class="mb-4"></div>
 		  	
-		  	<!-- Button Crea -->
-		  	<button type="submit" class="btn btn-primary">Crea</button>
+		  	<!-- Button Salva -->
+		  	<button type="submit" class="btn btn-primary">Salva</button>
 		  	<!-- Button Annulla -->
-		  	<button type="submit" href="./index.html" class="btn btn-danger">Annulla</button>
+		  	<a href="./index.html" class="btn btn-danger">Annulla</a>
 		</form>
 	</main>
 
 	<!-- Scripts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../scripts/edit.js"></script>
+    <script src="../scripts/ingrediente/index.js"></script> <!-- tenere ingrediente/index.js PRIMA di pizza/edit.js -->
+    <script src="../scripts/pizza/edit.js"></script>	<!-- tenere pizza/edit.js DOPO ingrediente/index.js -->
 </body>
 </html>

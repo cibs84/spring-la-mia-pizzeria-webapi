@@ -61,13 +61,14 @@
 		  	<!-- Button Crea -->
 		  	<button type="submit" class="btn btn-primary">Crea</button>
 		  	<!-- Button Annulla -->
-		  	<button type="submit" href="./index.html" class="btn btn-danger">Annulla</button>
+		  	<a href="./index.html" class="btn btn-danger">Annulla</a>
 		</form>
 	</main>
 
 	<!-- Scripts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../scripts/create.js"></script>
+    <script src="../scripts/ingrediente/index.js"></script> <!-- tenere ingrediente/index.js PRIMA di pizza/create.js -->
+    <script src="../scripts/pizza/create.js"></script>	<!-- tenere pizza/create.js DOPO ingrediente/index.js -->
 </body>
 </html>
