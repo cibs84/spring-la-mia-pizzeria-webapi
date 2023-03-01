@@ -1,6 +1,8 @@
 ingredientList(); // INVOCATO DA scripts/ingrediente/index.js
 
-function createPizza() {
+function createPizza(event) {
+    event.preventDefault();
+
     let checkboxes = document.querySelectorAll(".form-check-input");
     let checkboxLabels = document.querySelectorAll(".form-check-label");
     let arrCheckedIngredients = [];
@@ -29,18 +31,30 @@ function createPizza() {
             ingredienti: arrCheckedIngredients
         })
         .then((res) => {
-            alert(".then");
             console.log("Richiesta Ok", res);
-            console.log("*******", res.response.data.errors);
 
-            return window.location.href = "./index.html";
+            window.location.href = "./index.html";
         })
-        .catch((err) => {
-            // ciclare su res.response.data.errors
-            console.error("Errore nella richiesta: ", err);
-            console.log("#################", res.response.data.errors);
+        .catch((res) => {
+            console.error("Errore nella creazione della pizza: ", res);
+            showValidationErrors(res.response.data.errors);
         });
 }
 
+function showValidationErrors(errorList) {
+    console.error("Errori di validazione: ", errorList);
 
+    resetValidationErrors();
+    errorList.forEach(error => {
+        document.querySelector("#validation_errors").innerHTML += "<li>"+error.defaultMessage+"</li>";
+        document.querySelector(`#${error.field}_err`).innerHTML += "<li>"+error.defaultMessage+"</li>";
+    })
+}
+
+function resetValidationErrors() {
+    document.querySelector("#validation_errors").innerHTML = '';
+    document.querySelectorAll("[id$=_err]").forEach(element => { // prende tutti gli elementi html con id che finisce con _err
+        element.innerHTML = "";
+    });
+}
 

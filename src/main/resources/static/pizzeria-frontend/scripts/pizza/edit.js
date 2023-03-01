@@ -39,7 +39,7 @@ function populateHtml(pizza) {
 
 function updatePizza(e) {
     e.preventDefault();
-    console.log("CIAOOOOOOOOOOO");
+    
     let checkboxes = document.querySelectorAll(".form-check-input");
     let checkboxLabels = document.querySelectorAll(".form-check-label");
     let arrCheckedIngredients = []; // array degli ingredienti checked che verrà inviato all'api tramite chiamata axios
@@ -51,11 +51,12 @@ function updatePizza(e) {
             checkboxLabels.forEach(checkboxLabel => {
                 if (checkboxLabel.for == checkbox.id) {
                     nameCheckedIngredient = checkboxLabel.textContent;
+                    alert(checkboxLabel.for);
                 }
             });
+            alert(nameCheckedIngredient);
             arrCheckedIngredients.push({id: checkbox.value, name: nameCheckedIngredient});
         }
-        console.log("arrCheckedIngredients: ", arrCheckedIngredients);
     });
 
     // Chiamata post per la modifica della Pizza

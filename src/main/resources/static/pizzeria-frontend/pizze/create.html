@@ -12,7 +12,13 @@
 		<h1 class="mt-4">Crea una nuova pizza</h1>
 		
 		<!--  Form: Crea una nuova pizza -->
-		<form id="pizza-form" onsubmit="createPizza()">
+		<form id="pizza-form" onsubmit="createPizza(event)">
+			<!-- Elenco Errori -->
+			<div class="text-danger">
+				<ul id="validation_errors">
+
+				</ul>
+			</div>
 			<!--  Nome -->
 	    	<label for="name" class="form-label">Nome</label>
 	    	<input type="text" maxlength="30" class="form-control" id="name">
